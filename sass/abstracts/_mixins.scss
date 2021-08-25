@@ -1,0 +1,66 @@
+@mixin clearfix {
+	&::after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
+
+@mixin absCenter {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+
+//======== MEDIA QUERIES  ==============
+
+/*
+  0 - 600px:  Smartphones
+
+601 -  900px: Tablet portrait
+
+901 - 1200px: Tablet Landscape
+
+[1201 - 1800] is where normal styles apply
+
+1801px + :    Larger Desktops
+
+
+
+ $breakpoint arguement choices:
+
+ - phone
+ - tab-port
+ - tab-land
+ - big-desktop
+
+ 1em = 16px
+ We use em's so pixels will change if base font-size is overwritten in browser by user
+ should they change their font settings
+
+
+ ORDER TO ADD MEDIA QUERIES: 
+ Base + typograpghy > layout + grid > pages > components
+*/
+
+
+
+@mixin respond($breakpoint) {
+	@if $breakpoint == phone {
+		@media (max-width: 37.5em) { @content }; //600px
+	}
+
+	@if $breakpoint == tab-port {
+		@media (max-width: 56.25em) { @content };  //900px
+	}
+
+	@if $breakpoint == tab-land {
+		@media (max-width: 75em) {	@content }; //1200px
+	}
+
+	@if $breakpoint == big-desktop {
+		@media (min-width: 112.5em) { @content }; //1800px
+	}
+}

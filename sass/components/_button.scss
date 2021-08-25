@@ -1,0 +1,100 @@
+.btn {
+	&,
+	&:link,
+	&:visited {
+		display: inline-block;
+		text-transform: uppercase;
+		text-decoration: none;
+		padding: 1.5rem 4rem;
+		border-radius: 10rem; /*gives button cylinder shape rather than default rectangle */
+		transition: all .2s;
+		position: relative;
+		font-size: $default-font-size;
+
+		//Change for the <button> element
+		border: none;
+		cursor: pointer;
+	}
+
+	&:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 1rem 2rem rgba($color-black,.2);
+	}
+
+	&:active,
+	&:focus {
+		transform: translateY(-.1rem);
+		box-shadow: 0 .5rem 1rem rgba($color-black,.2);
+		backface-visibility: hidden;
+		z-index: -1;
+	}
+
+	&--white {
+		background-color: $color-white;
+		color: $color-grey119;
+
+		&::after {
+		background-color: $color-white; 
+		}
+	}
+
+	&--green {
+		background-color: $color-primary;
+		color: $color-white;
+
+		&::after {
+		background-color: $color-primary; 
+		}
+	}
+
+	&::after {    /* pseudo-element ::after must have content and display properties defined explicitly, even if contetn is empty, or it WILL NOT WORK*/
+		content: "";
+		display: inline-block;
+		height: 100%; /* ::after acts like a child of of whatever you attach it to. So in this case, & is the parent of &::active and therefore width and height should be set to 100% to take up the whole button*/
+		width: 100%;
+		border-radius: 10rem;
+		position: absolute; /*absolute attaches itself to the colsest relatively positioned parent it can find */
+		top: 0;
+		left: 0;
+		z-index: -1;
+		transition: all .4s;
+	}
+
+
+	&:hover::after {
+		transform: scaleX(1.2) scaleY(1.25);
+		opacity: 0;
+	}
+
+	&--animated {
+		animation: moveInBottom 2.5s ease-out .75s;
+		animation-fill-mode: backwards; /*applies 0% by default when set to backwards, effectively rendering our button invisible before the animation happens. The button would be visible before the animation executed with the delay value set. */ 
+	}
+}
+
+
+.btn-text {
+	&:link,
+	&:visited {
+		font-size: $default-font-size;
+		color: $color-primary;
+		display: inline-block;
+		text-decoration: none;
+		border-bottom: .1rem solid $color-primary;
+		padding: .3rem;
+		transition: all .2s;
+	}
+
+	&:hover {
+		background-color: $color-primary;
+		color: $color-white;
+		box-shadow: 0 1rem 2rem rgba($color-black, .15);
+		transform: translateY(-2px);
+
+	}
+
+	&:active {
+		box-shadow: 0 .5rem 1rem rgba($color-black, .15);
+		transform: translateY(0);
+	}
+}

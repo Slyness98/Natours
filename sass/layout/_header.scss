@@ -1,0 +1,56 @@
+.header {
+	
+	height: 85vh;
+	background-image: linear-gradient(
+		to right bottom, 
+		rgba($color-primary-light, .65), 
+		rgba($color-primary-dark, .55)), 
+		url(../img/hero-small.jpg);
+
+	background-size: cover;
+	background-position: top;
+	position: relative;  /* this relative positioning givves reference for the top and left positioning properties expressed by logo-box below, the child of header in our HTML*/
+	
+
+
+	@supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+		-webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+		clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+		height: 95vh;
+	}
+/*if 600px and high-res screen w/ 192dpi (also specified for safari, which doesn't natively support min-resolution property)
+   or if we have a screen of at least 2000px....*/
+	@media (min-resolution: 192dpi) and (min-width: 37.5em),
+	(-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),
+	(min-width: 125em)  {
+		background-image: linear-gradient(
+		to right bottom, 
+		rgba($color-primary-light, .65), 
+		rgba($color-primary-dark, .55)), 
+		url(../img/hero.jpg);
+	}
+
+
+	@include respond(phone) {
+		-webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+		-moz-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+		clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+	}
+	&__logo-box {
+		position: absolute;
+		top: 4rem;
+		left: 4rem;
+	}
+
+	&__logo {
+		height: 3.5rem;
+	}
+
+	&__text-box {
+	position: absolute;
+	top: 40%;
+	left: 50%; /* top and left get positioned to 50% across of x and y of their parent */
+	transform: translate(-50%, -50%); /*Because position is set to absolute, we now translate the div contents by -50% and it will translate with respect to the element itself, not the parent*/
+	text-align: center;
+}
+}
